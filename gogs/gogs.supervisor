@@ -1,0 +1,3 @@
+[program:gogs]
+command=/usr/bin/gogs run web
+redirect_stderr=true
