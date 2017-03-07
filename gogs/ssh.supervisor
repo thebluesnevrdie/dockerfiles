@@ -1,6 +1,6 @@
 [program:sshd]
 directory=/usr/local/
-command=/usr/sbin/sshd -D
+command=/usr/sbin/sshd -e -D
 autostart=true
 autorestart=true
 redirect_stderr=true
