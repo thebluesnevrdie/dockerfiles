@@ -14,6 +14,7 @@ RUN curl -L https://deb.packager.io/key | apt-key add - && \
     # See https://github.com/docker/docker/issues/5663
     sed -ri 's/^session\s+required\s+pam_loginuid.so$/session optional pam_loginuid.so/' /etc/pam.d/sshd && \
     groupmod -g 999 gogs && usermod -u 999 -g 999 gogs && \
+    chown -R 999:999 /etc/gogs /var/log/gogs /var/db/gogs /opt/gogs && \
     # See http://arlimus.github.io/articles/usepam/
     usermod -p "*" gogs && \
     rm /etc/nginx/sites-available/default && \
