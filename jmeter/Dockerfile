@@ -11,6 +11,7 @@ RUN curl -L ${JMETER_URL} -o apache-jmeter-${JMETER_VERSION}.tgz && \
 ENV PATH $PATH:/opt/apache-jmeter-${JMETER_VERSION}/bin
 ADD entrypoint.sh /
 RUN chmod +x /entrypoint.sh
+RUN mkdir /load_tests
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["/entrypoint.sh"]
