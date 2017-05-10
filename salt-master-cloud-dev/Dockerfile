@@ -10,8 +10,10 @@ RUN apt-get update && \
     curl -sSL https://bootstrap.pypa.io/get-pip.py | /bin/python && \
     curl -sSL https://bootstrap.saltstack.com | sh -s -- -P -M -L -X git && \
     patch /usr/lib/python2.7/dist-packages/salt/grains/core.py /tmp/grains.patch && \
+    /usr/local/bin/pip install python-etcd && \
     apt-get -y install supervisor && rm /etc/supervisor/supervisord.conf && \
-    apt-get -y autoremove && rm -f /var/cache/apt/archives/*.deb
+    apt-get -y autoremove && rm -f /var/cache/apt/archives/*.deb && \
+    rm -fr /tmp/*
 
 ADD supervisord.conf /etc/supervisord.conf
 ADD master.supervisor /etc/supervisor/conf.d/master.conf
