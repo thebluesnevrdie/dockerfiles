@@ -1,0 +1,13 @@
+--- core.py	2017-05-09 17:23:29.381711186 -0500
++++ core.py.new	2017-05-09 17:23:23.593628188 -0500
+@@ -1364,6 +1364,10 @@
+                             )
+                     elif salt.utils.which('supervisord') in init_cmdline:
+                         grains['init'] = 'supervisord'
++                    elif init_bin.endswith('dumb-init'):
++                        grains['init'] = 'dumb-init'
++                    elif init_bin.endswith('tini'):
++                        grains['init'] = 'tini'
+                     elif init_cmdline == ['runit']:
+                         grains['init'] = 'runit'
+                     else:
