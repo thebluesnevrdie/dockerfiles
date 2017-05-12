@@ -47,7 +47,12 @@ then
 	for j in $(etcdctl --no-sync ls ${i})
 	do
 	    z=$(etcdctl --no-sync get ${j})
-	    REMOTE_HOSTS="${REMOTE_HOSTS} ${i:1}:${z}"
+	    if [[ -z ${REMOTE_HOSTS} ]]
+	    then
+		REMOTE_HOSTS="${i:1}:${z}"
+	    else
+		REMOTE_HOSTS="${i:1}:${z},${REMOTE_HOSTS}"
+	    fi
 	done
     done
 
