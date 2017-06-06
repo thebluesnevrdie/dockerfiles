@@ -10,7 +10,7 @@ RUN curl -L http://repo.saltstack.com/apt/debian/8/amd64/${SALT_VERSION}/SALTSTA
     apt-get update && apt-get -y upgrade && \
     apt-get -y install salt-master && \
     patch /usr/lib/python2.7/dist-packages/salt/grains/core.py /tmp/grains.patch && \
-    apt-get -y autoremove && rm -f /var/cache/apt/archives/*.deb
+    apt-get -y autoremove && rm -f /var/cache/apt/archives/*.deb && \
     rm -fr /tmp/*
 
 COPY defaults.conf /etc/salt/master.d/defaults.conf
