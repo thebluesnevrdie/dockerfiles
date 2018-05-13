@@ -2,7 +2,7 @@ FROM thebluesnevrdie/base
 LABEL maintainer "Cody Crawford <me@codycrawford.net>"
 ENV LC_ALL C
 ENV DEBIAN_FRONTEND noninteractive
-ENV SALT_VERSION 2016.3
+ENV SALT_VERSION 2018.3
 
 ADD grains.patch /tmp/grains.patch
 RUN curl -L http://repo.saltstack.com/apt/debian/8/amd64/${SALT_VERSION}/SALTSTACK-GPG-KEY.pub | apt-key add - && \

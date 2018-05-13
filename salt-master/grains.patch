@@ -1,13 +1,28 @@
---- /usr/lib/python2.7/dist-packages/salt/grains/core.py	2017-06-06 00:17:57.315185933 -0500
-+++ /usr/lib/python2.7/dist-packages/salt/grains/core.py.new	2017-06-06 00:15:12.837296917 -0500
-@@ -1253,6 +1253,10 @@
+From 039b167e5f7da04e971d52a98279280c1ffe4dce Mon Sep 17 00:00:00 2001
+From: Alexey Aksenov <ezh@ezh.msk.ru>
+Date: Sun, 1 Apr 2018 22:44:46 +0300
+Subject: [PATCH] Add support for more init systems
+
+https://github.com/Yelp/dumb-init
+https://github.com/krallin/tini
+---
+ salt/grains/core.py | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/salt/grains/core.py b/salt/grains/core.py
+index 38e288ce9c5d..26045bba3e59 100644
+--- a/salt/grains/core.py
++++ b/salt/grains/core.py
+@@ -1495,6 +1495,12 @@ def os_data():
                              )
-                     elif salt.utils.which('supervisord') in init_cmdline:
+                     elif salt.utils.path.which('supervisord') in init_cmdline:
                          grains['init'] = 'supervisord'
-+                    elif init_bin.endswith('dumb-init'):
++                    elif salt.utils.path.which('dumb-init') in init_cmdline:
++                        # https://github.com/Yelp/dumb-init
 +                        grains['init'] = 'dumb-init'
-+                    elif init_bin.endswith('tini'):
++                    elif salt.utils.path.which('tini') in init_cmdline:
++                        # https://github.com/krallin/tini
 +                        grains['init'] = 'tini'
-                     else:
-                         log.info(
-                             'Could not determine init system from command line: ({0})'
+                     elif init_cmdline == ['runit']:
+                         grains['init'] = 'runit'
+                     elif '/sbin/my_init' in init_cmdline:
